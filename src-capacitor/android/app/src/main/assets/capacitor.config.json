@@ -1,0 +1,10 @@
+{
+  "appId": "org.quasar.cordova.app",
+  "appName": "pulse mobile app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "server": {
+    "hostname": "pulse"
+  }
+}

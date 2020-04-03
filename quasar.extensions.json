@@ -1,0 +1,44 @@
+{
+  "@quasar/icon-genie": {
+    "minify_dev": "pngquant",
+    "minify_build": "zopfli",
+    "cordova": {
+      "background_color": "#000074",
+      "splashscreen_type": "pure"
+    },
+    "build_always": false,
+    "__internal": {
+      "dev": {
+        "cordova": {
+          "iconHash": "4ceb15bbf540d90246ec5badb3db41bf",
+          "splashscreenHash": "2b12dd9022a325c289cc4b979b648ed8",
+          "splashscreenType": "pure",
+          "backgroundColor": "#000074"
+        },
+        "spa": {
+          "iconHash": "4ceb15bbf540d90246ec5badb3db41bf"
+        },
+        "capacitor": {
+          "iconHash": "4ceb15bbf540d90246ec5badb3db41bf",
+          "splashscreenHash": "2b12dd9022a325c289cc4b979b648ed8",
+          "splashscreenType": "pure",
+          "backgroundColor": "#000074"
+        }
+      },
+      "build": {
+        "cordova": {
+          "iconHash": "4ceb15bbf540d90246ec5badb3db41bf",
+          "splashscreenHash": "2b12dd9022a325c289cc4b979b648ed8",
+          "splashscreenType": "pure",
+          "backgroundColor": "#000074"
+        },
+        "capacitor": {
+          "iconHash": "4ceb15bbf540d90246ec5badb3db41bf",
+          "splashscreenHash": "2b12dd9022a325c289cc4b979b648ed8",
+          "splashscreenType": "pure",
+          "backgroundColor": "#000074"
+        }
+      }
+    }
+  }
+}

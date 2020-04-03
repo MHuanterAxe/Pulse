@@ -1,0 +1,10 @@
+{
+  "appId": "org.mh-works.mh.pulse",
+  "appName": "pulse mobile app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "server": {
+    "hostname": "pulse"
+  }
+}
