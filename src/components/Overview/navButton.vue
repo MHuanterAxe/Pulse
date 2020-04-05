@@ -31,27 +31,28 @@ export default {
 
 <style lang="sass" scoped>
 .nav-button
-  height: auto
-  width: 20%
+  height: 35px
+  width: 21%
   padding: 0.5em
   display: flex
   position: relative
   justify-content: space-between
+  align-items: center
   cursor: pointer
 .background
   position: absolute
   border-radius: 100px
   top: 0
   left: 0
-  width: 100%
-  height: 100%
+  height: 35px
   z-index: -1
+  width: 100%
   &-unactive
     position: absolute
     top: 0
     left: 0
-    height: 100%
-    width: 45%
+    height: 35px
+    width: 35px
     border-radius: 100px
     z-index: -1
 .animation
