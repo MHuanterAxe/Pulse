@@ -40,7 +40,7 @@ export default {
       active: 0,
       nav: [
         { id: 0, name: 'Главная', icon: 'nav-pulse', to: '/' },
-        { id: 1, name: 'Все задачи', icon: 'nav-all-tasks', to: '/overview' },
+        { id: 1, name: 'Обзор', icon: 'nav-all-tasks', to: '/overview' },
         { id: 2, name: 'Добавить', icon: 'nav-add', to: '/add' },
         { id: 3, name: 'Папки', icon: 'nav-folders', to: '/lists' },
         { id: 4, name: 'Профиль', icon: 'nav-profile', to: '/profile' }
@@ -63,6 +63,7 @@ export default {
   display: flex
   justify-content: center
   width: 100%
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2)
 .img-active
   fill: #7E3CB0
 .button

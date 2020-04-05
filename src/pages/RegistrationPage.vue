@@ -4,7 +4,7 @@
       <h3 class="text-maintitle text-center">Регистрация</h3>
     </div>
     <div class="main">
-      <div class="block block-shadow">
+      <div class="floating-block floating-block-shadow">
         <q-form autofocus class="">
           <div class="q-mb-lg">
             <input v-model="user.last_name" class="input" type="text" placeholder="Введите Фамилию">
@@ -24,7 +24,7 @@
         </q-form>
       </div>
     </div>
-    <div v-if="msg" class="block block-shadow">
+    <div v-if="msg" class="floating-block block-shadow">
       <h5>{{ msg }}</h5>
     </div>
   </q-page>

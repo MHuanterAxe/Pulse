@@ -4,7 +4,8 @@ const state = {
   notes: []
 }
 const getters = {
-  notes: state => state.notes
+  notes: state => state.notes,
+  count: state => state.notes.length
 }
 const mutations = {
   SET_NOTES (state, payload) {

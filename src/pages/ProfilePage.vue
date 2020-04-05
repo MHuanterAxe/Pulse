@@ -4,7 +4,7 @@
       <h3 class="text-maintitle app-ml-20">Профиль</h3>
     </div>
     <div class="main">
-      <div class="block">
+      <div class="floating-block">
         <button @click="logout" class="button button-add button-shadow text-white bg-red-8">Выйти</button>
       </div>
     </div>

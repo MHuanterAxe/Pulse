@@ -3,14 +3,14 @@
     <div class="page-title q-mt-xl q-mb-lg">
       <h3 class="text-maintitle app-ml-20">Добавить</h3>
     </div>
-    <div class="main q-pb-xl q-mb-xl">
-      <div class="block block-shadow">
+    <div class="main">
+      <div class="floating-block floating-block-shadow">
         <add-button v-for="el in addButtons.main" :key="el.id" :button="el"></add-button>
       </div>
-      <div class="block block-shadow">
+      <div class="floating-block floating-block-shadow">
         <add-button v-for="el in addButtons.lists" :key="el.id" :button="el"></add-button>
       </div>
-      <div class="block block-shadow">
+      <div class="floating-block floating-block-shadow">
         <add-button v-for="el in addButtons.other" :key="el.id" :button="el"></add-button>
       </div>
     </div>

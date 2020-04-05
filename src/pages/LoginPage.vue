@@ -4,7 +4,7 @@
       <h3 class="text-maintitle text-center">Авторизация</h3>
     </div>
     <div class="main">
-      <div class="block block-shadow">
+      <div class="floating-block floating-block-shadow">
         <q-form autofocus class="">
           <div class="q-mb-lg">
             <input v-model="user.email" class="input" type="text" placeholder="Введите Email">
@@ -29,7 +29,7 @@
         </q-form>
       </div>
     </div>
-    <div v-if="msg" class="block block-shadow">
+    <div v-if="msg" class="floating-block block-shadow">
       <h5>{{ msg }}</h5>
     </div>
   </q-page>
