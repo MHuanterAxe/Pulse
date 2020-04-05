@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-button">
+  <div @click="$emit('change', button)" class="nav-button">
     <div :class="backgroundClass"></div>
     <img class="icon" :src="'../../statics/icons/main/' + button.icon + '.svg'" alt="">
     <h5 :class="textClass">{{ button.count }}</h5>
@@ -8,10 +8,11 @@
 <script>
 export default {
   name: 'NavButton',
-  props: ['button'],
+  props: ['button', 'count'],
   computed: {
     backgroundClass () {
       return [
+        'animation',
         { 'background-unactive': !this.button.active },
         this.button.color,
         { background: this.button.active }
@@ -19,7 +20,7 @@ export default {
     },
     textClass () {
       return [
-        'count text-small',
+        'count text-small animation',
         { 'text-white': this.button.active },
         { 'color-primary': !this.button.active }
       ]
@@ -53,6 +54,8 @@ export default {
     width: 45%
     border-radius: 100px
     z-index: -1
+.animation
+  transition: all 0.3s ease-in-out
 .icon
   height: 100%
   width: auto

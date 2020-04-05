@@ -77,3 +77,14 @@ p, h1, h2, h3, h4, h5, h6
 .fadeOut
   -webkit-animation: fade-out 1s ease-out both
   animation: fade-out 1s ease-out both
+
+.list
+  &-enter
+    opacity: 0
+    &-active
+      transition: all 0.5s
+  &-leave
+    &-to
+      opacity: 0
+    &-active
+      transition: all 0.5s
