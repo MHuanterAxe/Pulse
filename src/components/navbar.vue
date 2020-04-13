@@ -82,9 +82,10 @@ export default {
   height: 54px
   width: 100%
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2)
-  &-light
-    background: #ffffff
+  background: #ffffff
+  transition: all 0.5s ease-in-out
   &-dark
+    transition: all 0.5s ease-in-out
     background: #303030
 .button
   width: 20%
@@ -94,16 +95,21 @@ export default {
   outline: none
   border: none
   background-color: transparent
+  transition: all 0.5s ease-in-out
   &-image
+    transition: all 0.5s ease-in-out
     fill: #4B5457 !important
     &-active
+      transition: all 0.5s ease-in-out
       fill: #7E3CB0 !important
     &-dark
+      transition: all 0.5s ease-in-out
       fill: #ffffff !important
   &-wrapper
     text-decoration: none
     color: #4B5457
     font-family: 'Roboto', sans-serif
+    transition: all 0.5s ease-in-out
   &-name
     font-style: normal
     font-weight: bold
@@ -111,8 +117,11 @@ export default {
     line-height: 10px
     text-align: center
     color: #4B5457
+    transition: all 0.5s ease-in-out
     &-dark
+      transition: all 0.5s ease-in-out
       color: #ffffff !important
     &-active
+      transition: all 0.5s ease-in-out
       color: #7E3CB0 !important
 </style>
