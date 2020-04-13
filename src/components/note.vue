@@ -1,10 +1,10 @@
 <template>
   <block card v-if="note" class="note">
     <div class="note-label">
-      <h5 class="text-regular color-primary full-width">{{ note.note_label }}</h5>
+      <h5 :class="noteLabelClass">{{ note.note_label }}</h5>
     </div>
     <div v-if="note.text" class="q-mt-sm">
-      <p class="note-text text-regular color-secondary">{{ note.text }}</p>
+      <p :class="noteTextClass">{{ note.text }}</p>
     </div>
     <div class="misc flex justify-end">
       <div class="delete">
@@ -17,12 +17,27 @@
 </template>
 
 <script>
+import { Dark } from 'quasar'
 import { mapActions } from 'vuex'
 import block from './block'
 export default {
   name: 'note',
   props: ['note'],
   components: { block },
+  computed: {
+    noteLabelClass () {
+      return [
+        'text-regular color-primary full-width',
+        { 'color-primary-white': Dark.isActive }
+      ]
+    },
+    noteTextClass () {
+      return [
+        'text-regular color-secondary',
+        { 'color-secondary-white': Dark.isActive }
+      ]
+    }
+  },
   methods: {
     ...mapActions({
       deleteNote: 'Notes/deleteNote'
