@@ -1,9 +1,9 @@
 <template>
-  <div v-if="note" class="note card-shadow">
+  <block card v-if="note" class="note">
     <div class="note-label">
       <h5 class="text-regular color-primary full-width">{{ note.note_label }}</h5>
     </div>
-    <div class="q-mt-sm">
+    <div v-if="note.text" class="q-mt-sm">
       <p class="note-text text-regular color-secondary">{{ note.text }}</p>
     </div>
     <div class="misc flex justify-end">
@@ -13,14 +13,16 @@
         </button>
       </div>
     </div>
-  </div>
+  </block>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import block from './block'
 export default {
   name: 'note',
   props: ['note'],
+  components: { block },
   methods: {
     ...mapActions({
       deleteNote: 'Notes/deleteNote'
@@ -34,7 +36,6 @@ export default {
 
 <style lang="sass">
 .note
-  padding: 10px
   display: flex
   flex-direction: column
 .btn

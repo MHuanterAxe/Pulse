@@ -45,7 +45,7 @@ export default {
   top: 0
   left: 0
   height: 35px
-  z-index: -1
+  z-index: 0
   width: 100%
   &-unactive
     position: absolute
@@ -54,10 +54,13 @@ export default {
     height: 35px
     width: 35px
     border-radius: 100px
-    z-index: -1
+    z-index: 0
 .animation
   transition: all 0.3s ease-in-out
 .icon
   height: 100%
   width: auto
+  z-index: 10
+.count
+  z-index: 10
 </style>

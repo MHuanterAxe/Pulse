@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div :class="navClass">
     <button
       v-for="btn in nav"
       :key="btn.id"
@@ -7,21 +7,12 @@
       @click="active = btn.id"
     >
       <router-link class="button-wrapper" :to="btn.to">
-        <div v-if="active === btn.id">
+        <div>
           <img
-            class="button-image img-active"
+            :class="buttonImageClass(btn.id)"
             :src="'../statics/icons/navigation/' + btn.icon + '.svg'"
             :alt="btn.name">
-          <div  class="button-name color-active">
-            {{ btn.name }}
-          </div>
-        </div>
-        <div v-else>
-          <img
-            class="button-image"
-            :src="'../statics/icons/navigation/' + btn.icon + '.svg'"
-            :alt="btn.name">
-          <div class="button-name">
+          <div  :class="buttonNameClass(btn.id)">
             {{ btn.name }}
           </div>
         </div>
@@ -31,6 +22,7 @@
 </template>
 
 <script>
+import { Dark } from 'quasar'
 document.addEventListener('deviceready', () => {
 }, false)
 export default {
@@ -48,11 +40,35 @@ export default {
     }
   },
   computed: {
-    navClassObject: () => (id) => {
+    navClass: () => {
+      return [
+        'navbar',
+        { 'navbar-dark': Dark.isActive }
+      ]
+    },
+    navClassObject: () => {
       return [
         'button-wrapper ',
-        { 'button-active': this.active === id }
+        { 'button-dark': Dark.isActive }
       ]
+    },
+    buttonNameClass () {
+      return function (id) {
+        return [
+          'button-name ',
+          { 'button-name-dark': Dark.isActive },
+          { 'button-name-active': this.active === id }
+        ]
+      }
+    },
+    buttonImageClass () {
+      return function (id) {
+        return [
+          'button-image ',
+          { 'button-image-dark': Dark.isActive },
+          { 'button-image-active': this.active === id }
+        ]
+      }
     }
   }
 }
@@ -62,31 +78,41 @@ export default {
 .navbar
   display: flex
   justify-content: center
+  align-items: center
+  height: 54px
   width: 100%
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2)
-.img-active
-  fill: #7E3CB0
+  &-light
+    background: #ffffff
+  &-dark
+    background: #303030
 .button
   width: 20%
-  height: 100%
   display: flex
   flex-direction: column
   align-items: center
   outline: none
   border: none
-  background-color: #ffffff
-  &-active
-    color: #7E3CB0 !important
-    .button-name
-      color: #7E3CB0
+  background-color: transparent
+  &-image
+    fill: #4B5457 !important
+    &-active
+      fill: #7E3CB0 !important
+    &-dark
+      fill: #ffffff !important
   &-wrapper
     text-decoration: none
     color: #4B5457
-    font-family: 'Roboto'
+    font-family: 'Roboto', sans-serif
   &-name
     font-style: normal
     font-weight: bold
     font-size: 10px
     line-height: 10px
     text-align: center
+    color: #4B5457
+    &-dark
+      color: #ffffff !important
+    &-active
+      color: #7E3CB0 !important
 </style>

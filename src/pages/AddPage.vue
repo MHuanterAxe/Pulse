@@ -4,20 +4,21 @@
       <h3 class="text-maintitle app-ml-20">Добавить</h3>
     </div>
     <div class="main">
-      <div class="floating-block floating-block-shadow">
+      <block>
         <add-button v-for="el in addButtons.main" :key="el.id" :button="el"></add-button>
-      </div>
-      <div class="floating-block floating-block-shadow">
+      </block>
+      <block>
         <add-button v-for="el in addButtons.lists" :key="el.id" :button="el"></add-button>
-      </div>
-      <div class="floating-block floating-block-shadow">
+      </block>
+      <block>
         <add-button v-for="el in addButtons.other" :key="el.id" :button="el"></add-button>
-      </div>
+      </block>
     </div>
   </q-page>
 </template>
 
 <script>
+import block from '../components/block'
 import addButton from '../components/Add/button'
 document.addEventListener('deviceready', () => {
 }, false)
@@ -43,7 +44,7 @@ export default {
     }
   },
   components: {
-    addButton
+    block, addButton
   }
 }
 </script>

@@ -1,19 +1,20 @@
 <template>
-  <div class="floating-block floating-block-shadow q-mb-lg flex justify-between">
+  <block class="q-mb-lg flex justify-between">
     <nav-button
       v-for="el in buttons"
       :key="el.id"
       :button="el"
       @change="change"
     ></nav-button>
-  </div>
+  </block>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import block from '../block'
 import navButton from './navButton'
 export default {
   name: 'OverViewNavigation',
-  components: { navButton },
+  components: { block, navButton },
   data () {
     return {
       active: 0,

@@ -21,6 +21,7 @@ const routes = [
       },
       { name: 'add', path: 'add', component: () => import('pages/AddPage') },
       { name: 'addNote', path: 'add/note', component: () => import('pages/Add/NotePage') },
+      { name: 'addTask', path: 'add/task', component: () => import('pages/Add/TaskPage') },
       { name: 'lists', path: 'lists', component: () => import('pages/ListsPage') },
       { name: 'profile', path: 'profile', component: () => import('pages/ProfilePage') }
     ]
