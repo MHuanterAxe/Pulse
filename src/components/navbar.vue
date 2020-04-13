@@ -6,12 +6,14 @@
       class="button"
       @click="active = btn.id"
     >
-      <router-link class="button-wrapper" :to="btn.to">
+      <router-link class="buttaon-wrapper" :to="btn.to">
         <div>
-          <img
-            :class="buttonImageClass(btn.id)"
-            :src="'../statics/icons/navigation/' + btn.icon + '.svg'"
-            :alt="btn.name">
+          <transition enter-active-class="fadeIn" leave-active-class="fadeOut" mode="out-in">
+            <img
+              :class="buttonImageClass(btn.id)"
+              :src="iconSrc(btn)"
+              :alt="btn.name">
+          </transition>
           <div  :class="buttonNameClass(btn.id)">
             {{ btn.name }}
           </div>
@@ -30,6 +32,7 @@ export default {
   data () {
     return {
       active: 0,
+      isDark: Dark.isActive,
       nav: [
         { id: 0, name: 'Главная', icon: 'nav-pulse', to: '/' },
         { id: 1, name: 'Обзор', icon: 'nav-all-tasks', to: '/overview' },
@@ -68,6 +71,11 @@ export default {
           { 'button-image-dark': Dark.isActive },
           { 'button-image-active': this.active === id }
         ]
+      }
+    },
+    iconSrc () {
+      return function (btn) {
+        return '../statics/icons/navigation/' + (this.active === btn.id ? btn.icon + '-active' : (Dark.isActive ? btn.icon + '-dark' : btn.icon)) + '.svg'
       }
     }
   }
