@@ -20,6 +20,7 @@
     "axios": "^0.18.1",
     "quasar": "^1.0.0",
     "textarea-autosize": "^0.4.2",
+    "velocityjs": "^2.0.0",
     "vue-textarea-autosize": "^1.1.1"
   },
   "devDependencies": {

@@ -10,17 +10,67 @@
       <img src="../../statics/icons/main/btn-note-unactive.svg" alt="note">
     </div>
     <div class="main q-pb-xl">
-      <input v-model="task.label" class="input" type="text" placeholder="Название задачи">
-      <q-input name="date" no-error-icon input-class="input input-date" borderless v-model="task.date" mask="####/##/##" :rules="['date']">
-        <q-popup-proxy ref="qDateProxy" transition-show="fade" transition-hide="fade">
-          <q-date :subtitle="task.date" title="Дата задачи" first-day-of-week="1" flat :value="task.date" color="primary" :options="dateOptions" v-model="task.date" @input="() => $refs.qDateProxy.hide()" />
-        </q-popup-proxy>
-      </q-input>
-      <q-input name="time" no-error-icon input-class="input input-time" borderless v-model="task.time" mask="##:##" :rules="['date']">
-        <q-popup-proxy ref="qDateProxy" transition-show="fade" transition-hide="fade">
-          <q-time flat format24h :options="hourOptions" :value="task.time" color="primary" v-model="task.time" @input="() => $refs.qDateProxy.hide()" />
-        </q-popup-proxy>
-      </q-input>
+      <q-input
+        class="input"
+        v-model="task.label"
+        no-error-icon
+        borderless
+        outlined
+        type="text"
+        placeholder="Название задачи"
+      ></q-input>
+      <div class="flex justify-between">
+        <q-input
+          name="date"
+          class="input input-date"
+          no-error-icon
+          borderless
+          outlined
+          placeholder="Дата"
+          v-model="task.date"
+          :rules="['date']"
+        >
+          <q-popup-proxy
+            ref="qDateProxy"
+            transition-show="fade"
+            transition-hide="fade"
+          >
+            <q-date
+              title="Дата задачи"
+              first-day-of-week="1"
+              flat :value="task.date"
+              color="primary"
+              :options="dateOptions"
+              v-model="task.date"
+              @input="() => $refs.qDateProxy.hide()"
+            />
+          </q-popup-proxy>
+        </q-input>
+        <q-input
+          name="time"
+          class="input input-time"
+          no-error-icon
+          borderless
+          outlined
+          placeholder="Время"
+          v-model="task.time"
+          :rules="['time']">
+          <q-popup-proxy
+            ref="qDateProxy"
+            transition-show="fade"
+            transition-hide="fade">
+            <q-time
+              flat
+              format24h
+              :options="timeOptions"
+              :value="task.time"
+              color="primary"
+              v-model="task.time"
+              @input="() => $refs.qDateProxy.hide()"
+            />
+          </q-popup-proxy>
+        </q-input>
+      </div>
       <div class="attach">
         <h3 class="text-medium">Прикрепить</h3>
         <div class="toggles">
@@ -82,18 +132,17 @@ export default {
   components: { btnToggle },
   methods: {
     ...mapActions({
-      add: 'Add/addNote'
+      add: 'Add/addTask'
     }),
     async handleSubmit () {
-      await this.add(this.note)
+      await this.add(this.task)
       await this.$router.push({ name: 'add' })
     },
     dateOptions (date) {
       return Date.parse(date) - Date.now() + 24 * 3600 * 1000 >= 0
     },
-    hourOptions (hours, minutes) {
-      console.log(minutes)
-      return hours - new Date().getHours() >= 0
+    timeOptions (hr, min) {
+      return hr - new Date().getHours() >= 0
     }
   }
 }

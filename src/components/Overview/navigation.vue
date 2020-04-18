@@ -27,11 +27,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      notesCount: 'Notes/count'
+      notesCount: 'Notes/count',
+      tasksCount: 'Tasks/count'
     }),
     buttons () {
       return this.overviewButtons.map(el => {
         if (el.id === 0) el.count = this.notesCount
+        if (el.id === 2) el.count = this.tasksCount
         return el
       })
     }

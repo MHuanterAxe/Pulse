@@ -14,6 +14,17 @@ const actions = {
           reject(error)
         })
     })
+  },
+  addTask ({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      API.post('/tasks/create', payload)
+        .then(response => {
+          resolve(response)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
   }
 }
 export default {

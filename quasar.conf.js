@@ -35,7 +35,7 @@ module.exports = function (ctx) {
         dark: 'false' // or Boolean true/false
       },
       iconSet: 'material-icons', // Quasar icon set
-      lang: 'en-us', // Quasar language pack
+      lang: 'ru', // Quasar language pack
 
       // Possible values for "all":
       // * 'auto' - Auto-import needed Quasar components & directives
