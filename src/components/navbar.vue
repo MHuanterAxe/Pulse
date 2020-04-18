@@ -6,7 +6,7 @@
       class="button"
       @click="active = btn.id"
     >
-      <router-link class="buttaon-wrapper" :to="btn.to">
+      <router-link class="button-wrapper" :to="btn.to">
         <div>
           <transition enter-active-class="fadeIn" leave-active-class="fadeOut" mode="out-in">
             <img
@@ -31,7 +31,7 @@ export default {
   name: 'Navbar',
   data () {
     return {
-      active: 0,
+      active: this.$route.meta.navId || 0,
       isDark: Dark.isActive,
       nav: [
         { id: 0, name: 'Главная', icon: 'nav-pulse', to: '/' },

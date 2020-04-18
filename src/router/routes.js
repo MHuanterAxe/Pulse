@@ -7,23 +7,23 @@ const routes = [
       requiresAuth: true
     },
     children: [
-      { name: 'main', path: '', component: () => import('pages/MainPage.vue') },
+      { name: 'main', meta: { navId: 0 }, path: '', component: () => import('pages/MainPage.vue') },
       {
         name: 'overview',
         path: 'overview/',
         component: () => import('pages/OverviewPage'),
         children: [
-          { name: 'overview-notes', path: 'notes', component: () => import('components/Lists/noteList.vue') },
-          { name: 'overview-reminds', path: 'reminds', component: () => import('components/Lists/remindList.vue') },
-          { name: 'overview-tasks', path: 'tasks', component: () => import('components/Lists/taskList.vue') },
-          { name: 'overview-done', path: 'done', component: () => import('components/Lists/doneList.vue') }
+          { name: 'overview-notes', meta: { navId: 1 }, path: 'notes', component: () => import('components/Lists/noteList.vue') },
+          { name: 'overview-reminds', meta: { navId: 1 }, path: 'reminds', component: () => import('components/Lists/remindList.vue') },
+          { name: 'overview-tasks', meta: { navId: 1 }, path: 'tasks', component: () => import('components/Lists/taskList.vue') },
+          { name: 'overview-done', meta: { navId: 1 }, path: 'done', component: () => import('components/Lists/doneList.vue') }
         ]
       },
-      { name: 'add', path: 'add', component: () => import('pages/AddPage') },
-      { name: 'addNote', path: 'add/note', component: () => import('pages/Add/NotePage') },
-      { name: 'addTask', path: 'add/task', component: () => import('pages/Add/TaskPage') },
-      { name: 'lists', path: 'lists', component: () => import('pages/ListsPage') },
-      { name: 'profile', path: 'profile', component: () => import('pages/ProfilePage') }
+      { name: 'add', meta: { navId: 2 }, path: 'add', component: () => import('pages/AddPage') },
+      { name: 'addNote', meta: { navId: 2 }, path: 'add/note', component: () => import('pages/Add/NotePage') },
+      { name: 'addTask', meta: { navId: 2 }, path: 'add/task', component: () => import('pages/Add/TaskPage') },
+      { name: 'lists', meta: { navId: 3 }, path: 'lists', component: () => import('pages/ListsPage') },
+      { name: 'profile', meta: { navId: 4 }, path: 'profile', component: () => import('pages/ProfilePage') }
     ]
   },
   {

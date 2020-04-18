@@ -17,7 +17,6 @@ export default {
   components: { block, navButton },
   data () {
     return {
-      active: 0,
       overviewButtons: [
         { id: 0, active: true, color: 'grad-bg-red', icon: 'icon-note', count: 0, to: { name: 'overview-notes' } },
         { id: 1, active: false, color: 'grad-bg-orange', icon: 'icon-remind', count: 0, to: { name: 'overview-reminds' } },
