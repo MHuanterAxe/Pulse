@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { Dark } from 'quasar'
 import btnToggle from '../components/Add/btnToggle'
 document.addEventListener('deviceready', () => {
@@ -33,13 +34,16 @@ export default {
   },
   components: { btnToggle },
   methods: {
+    ...mapActions({
+      setUserTheme: 'User/setTheme'
+    }),
     logout () {
       window.localStorage.clear()
       this.$router.push({ name: 'login' })
     },
     changeTheme () {
       this.darkMode.isActive = !this.darkMode.isActive
-      Dark.set(this.darkMode.isActive)
+      this.setUserTheme({ initial: false })
     }
   }
 }
