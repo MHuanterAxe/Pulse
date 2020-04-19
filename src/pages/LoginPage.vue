@@ -7,8 +7,32 @@
       <div class="floating-block floating-block-shadow">
         <q-form autofocus class="">
           <div class="q-mb-lg">
-            <input v-model="user.email" class="input" type="text" placeholder="Введите Email">
-            <input v-model="user.password" class="input" type="text" placeholder="Введите Пароль">
+            <q-input
+              v-model="user.email"
+              class="input"
+              no-error-icon
+              borderless
+              outlined
+              type="text"
+              placeholder="Введите Email"
+            ></q-input>
+            <q-input
+              v-model="user.password"
+              class="input"
+              no-error-icon
+              borderless
+              outlined
+              :type="isPwd ? 'password' : 'text'"
+              placeholder="Введите Пароль"
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
           </div>
           <div class="buttons">
             <q-btn
@@ -16,13 +40,13 @@
               dense
               type="submit"
               @click.prevent="handleSubmit"
-              class="button q-mb-lg button-shadow button-active text-medium text-white"
+              class=" q-mb-lg button-shadow button-active text-medium text-white"
             >Войти</q-btn>
             <q-btn
               flat
               dense
               :to="{ name: 'register' }"
-              class="button button-shadow button-active text-medium text-white">
+              class=" button-shadow button-active text-medium text-white">
               Зарегистрироваться
             </q-btn>
           </div>
@@ -41,6 +65,7 @@ export default {
   name: 'LoginPage',
   data () {
     return {
+      isPwd: true,
       user: {
         email: '',
         password: ''

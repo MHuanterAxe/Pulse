@@ -10,8 +10,25 @@
       <img src="../../statics/icons/main/btn-note-unactive.svg" alt="note">
     </div>
     <div class="main q-pb-xl">
-      <input v-model="note.label" class="input" type="text" placeholder="Название заметки">
-      <textarea-autosize v-model="note.text" class="textarea" type="text" placeholder="Текст заметки"></textarea-autosize>
+      <q-input
+        v-model="note.label"
+        class="input"
+        no-error-icon
+        borderless
+        outlined
+        type="text"
+        placeholder="Название заметки"
+      ></q-input>
+      <q-input
+        v-model="note.text"
+        class="input"
+        no-error-icon
+        autogrow
+        borderless
+        outlined
+        type="text"
+        placeholder="Текст заметки"
+      ></q-input>
       <div class="attach">
         <h3 class="text-medium">Прикрепить</h3>
         <div class="toggles">

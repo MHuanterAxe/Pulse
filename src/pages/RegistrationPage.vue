@@ -7,10 +7,53 @@
       <div class="floating-block floating-block-shadow">
         <q-form autofocus class="">
           <div class="q-mb-lg">
-            <input v-model="user.last_name" class="input" type="text" placeholder="Введите Фамилию">
-            <input v-model="user.first_name" class="input" type="text" placeholder="Введите Имя">
-            <input v-model="user.email" class="input" type="text" placeholder="Введите Email">
-            <input v-model="user.password" class="input" type="text" placeholder="Введите Пароль">
+            <q-input
+              v-model="user.last_name"
+              class="input"
+              no-error-icon
+              borderless
+              outlined
+              type="text"
+              placeholder="Введите Фамилию"
+            ></q-input>
+            <q-input
+              v-model="user.first_name"
+              class="input"
+              no-error-icon
+              borderless
+              outlined
+              type="text"
+              placeholder="Введите Имя"
+            ></q-input>
+            <q-input
+              v-model="user.email"
+              class="input"
+              no-error-icon
+              borderless
+              outlined
+              type="email"
+              lazy-rules
+              placeholder="Введите Email"
+            ></q-input>
+            <q-input
+              v-model="user.password"
+              class="input"
+              no-error-icon
+              borderless
+              outlined
+              :rules="[ val => val.length >= 6 || 'Пароль должен состоять более чем из 6 символов!']"
+              lazy-rules
+              :type="isPwd ? 'password' : 'text'"
+              placeholder="Введите Пароль"
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
           </div>
           <div class="buttons">
             <q-btn
@@ -37,6 +80,7 @@ export default {
   name: 'RegistrationPage',
   data () {
     return {
+      isPwd: true,
       user: {
         first_name: '',
         last_name: '',
