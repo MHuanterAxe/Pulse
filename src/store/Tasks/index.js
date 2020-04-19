@@ -22,6 +22,18 @@ const actions = {
         })
     })
   },
+  updateTask ({ commit, dispatch }, payload) {
+    return new Promise((resolve, reject) => {
+      API.defaults.headers.authorization = localStorage.getItem('jwt')
+      API.put('/tasks/update/' + payload)
+        .then(response => {
+          dispatch('fetchTasks').then(() => resolve(response))
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  },
   deleteTask ({ commit, dispatch }, payload) {
     return new Promise((resolve, reject) => {
       API.defaults.headers.authorization = localStorage.getItem('jwt')
