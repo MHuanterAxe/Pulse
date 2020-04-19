@@ -1,20 +1,20 @@
 <template>
-  <block card v-if="task" class="task fit row">
-    <div class="col-2 flex justify-center items-center">
-      <q-checkbox v-model="task.completed"></q-checkbox>
+  <block card v-if="task" class="task flex justify-between">
+    <div class="q-mr-md">
+      <q-checkbox @input="updateState" dense v-model="task.completed"></q-checkbox>
     </div>
-    <div class="col-8">
+    <div style="flex: 1 1">
       <div class="task-label">
         <h5 :class="taskLabelClass">{{ task.task_label }}</h5>
       </div>
-      <div v-if="task.task_list_label !== 'Все задачи'" class="q-mt-sm">
+      <div v-if="task.task_list_label !== 'Все задачи'"  class="q-mt-sm"> <!-- -->
         <p :class="taskTextClass">{{ task.task_list_label }}</p>
       </div>
       <div class="q-mt-sm">
         <p :class="taskTextClass">{{ taskDate }}</p>
       </div>
     </div>
-    <div class="col-2 flex justify-center items-center">
+    <div class="flex q-ml-md items-end">
       <div class="delete">
         <button @click="del" class="button btn">
           <img src="../statics/icons/main/btn-delete.svg" alt="delete">
@@ -51,10 +51,16 @@ export default {
   },
   methods: {
     ...mapActions({
-      deleteTask: 'Tasks/deleteTask'
+      deleteTask: 'Tasks/deleteTask',
+      fetchTasks: 'Tasks/fetchTasks',
+      updateTask: 'Tasks/updateTask'
     }),
     del () {
       this.deleteTask(this.task.task_id)
+    },
+    async updateState () {
+      await this.updateTask(this.task.task_id)
+      await this.fetchTasks()
     }
   }
 }
