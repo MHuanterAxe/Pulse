@@ -1,7 +1,7 @@
 <template>
   <block card v-if="task" class="task flex justify-between">
     <div class="q-mr-md">
-      <q-checkbox @input="updateState" dense v-model="task.completed"></q-checkbox>
+      <q-checkbox @input="updateState" dense v-model="isActive" :value="task.completed"></q-checkbox>
     </div>
     <div style="flex: 1 1">
       <div class="task-label">
@@ -31,6 +31,11 @@ import block from './block'
 export default {
   name: 'note',
   props: ['task'],
+  data () {
+    return {
+      isActive: this.task.completed
+    }
+  },
   components: { block },
   computed: {
     taskLabelClass () {
