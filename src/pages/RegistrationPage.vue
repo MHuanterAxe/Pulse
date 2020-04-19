@@ -9,6 +9,7 @@
           <div class="q-mb-lg">
             <q-input
               v-model="user.last_name"
+              :disable="loading"
               class="input"
               no-error-icon
               borderless
@@ -18,6 +19,7 @@
             ></q-input>
             <q-input
               v-model="user.first_name"
+              :disable="loading"
               class="input"
               no-error-icon
               borderless
@@ -27,6 +29,7 @@
             ></q-input>
             <q-input
               v-model="user.email"
+              :disable="loading"
               class="input"
               no-error-icon
               borderless
@@ -37,6 +40,7 @@
             ></q-input>
             <q-input
               v-model="user.password"
+              :disable="loading"
               class="input"
               no-error-icon
               borderless
@@ -59,8 +63,9 @@
             <q-btn
               flat
               dense
+              :disable="loading"
+              :loading="loading"
               @click.prevent="handleSubmit"
-              :to="{ name: 'login' }"
               class="button button-shadow button-active text-medium text-white"
             >Зарегистрироваться</q-btn>
           </div>
@@ -74,13 +79,14 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'RegistrationPage',
   data () {
     return {
       isPwd: true,
+      loading: false,
       user: {
         first_name: '',
         last_name: '',
@@ -89,17 +95,36 @@ export default {
       }
     }
   },
-  computed: {
-    ...mapGetters({
-      msg: 'Auth/msg'
-    })
-  },
   methods: {
     ...mapActions({
-      register: 'Auth/register'
+      register: 'Auth/register',
+      login: 'Auth/login'
     }),
     handleSubmit () {
-      this.register(this.user).catch(err => console.log(err.message))
+      this.loading = true
+      this.register(this.user)
+        .then(res => {
+          this.$q.notify({
+            type: 'positive',
+            position: 'top',
+            message: res.message
+          })
+          this.loading = false
+          this.login({ email: this.user.email, password: this.user.password })
+            .then(res => {
+              this.$router.push({ name: 'main' })
+            })
+        })
+        .catch(err => {
+          this.$q.notify({
+            type: 'negative',
+            position: 'top',
+            message: err.data.message
+          })
+          this.user.email = ''
+          this.user.password = ''
+          this.loading = false
+        })
     }
   }
 }

@@ -9,6 +9,7 @@
           <div class="q-mb-lg">
             <q-input
               v-model="user.email"
+              :disable="loading"
               class="input"
               no-error-icon
               borderless
@@ -18,6 +19,7 @@
             ></q-input>
             <q-input
               v-model="user.password"
+              :disable="loading"
               class="input"
               no-error-icon
               borderless
@@ -39,12 +41,15 @@
               flat
               dense
               type="submit"
+              :loading="loading"
+              :disable="loading"
               @click.prevent="handleSubmit"
               class=" q-mb-lg button-shadow button-active text-medium text-white"
             >Войти</q-btn>
             <q-btn
               flat
               dense
+              :disable="loading"
               :to="{ name: 'register' }"
               class=" button-shadow button-active text-medium text-white">
               Зарегистрироваться
@@ -53,37 +58,49 @@
         </q-form>
       </div>
     </div>
-    <div v-if="msg" class="floating-block block-shadow">
-      <h5>{{ msg }}</h5>
-    </div>
   </q-page>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'LoginPage',
   data () {
     return {
       isPwd: true,
+      loading: false,
       user: {
         email: '',
         password: ''
       }
     }
   },
-  computed: {
-    ...mapGetters({
-      msg: 'Auth/msg'
-    })
-  },
   methods: {
     ...mapActions({
       login: 'Auth/login'
     }),
     handleSubmit () {
+      this.loading = true
       this.login(this.user)
-      this.$router.push({ name: 'main' })
+        .then(res => {
+          this.$q.notify({
+            type: 'positive',
+            position: 'top',
+            message: res.message
+          })
+          this.loading = false
+          this.$router.push({ name: 'main' })
+        })
+        .catch(err => {
+          this.$q.notify({
+            type: 'negative',
+            position: 'top',
+            message: err.data.message
+          })
+          this.user.email = ''
+          this.user.password = ''
+          this.loading = false
+        })
     }
   }
 }
