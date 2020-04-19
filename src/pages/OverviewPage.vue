@@ -5,7 +5,9 @@
     </div>
     <div class="main">
       <navigation></navigation>
-      <router-view></router-view>
+      <transition name="list" appear mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
   </q-page>
 </template>

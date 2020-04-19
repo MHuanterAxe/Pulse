@@ -1,12 +1,10 @@
 <template>
-  <transition name="list" appear mode="out-in">
-    <div class="main q-mt-md">
-      <h4 class="text-medium app-ml-20">Задачи</h4>
-      <transition-group v-if="tasks" class="notes q-pt-md" name="list" appear mode="out-in">
-        <task v-for="task in tasks" :key="task.task_id" :task="task"></task>
-      </transition-group>
-    </div>
-  </transition>
+  <div class="main q-mt-md">
+    <h4 class="text-medium app-ml-20">Задачи</h4>
+    <transition-group v-if="tasks" class="notes q-pt-md" name="list" appear mode="out-in">
+      <task v-for="task in tasks" :key="task.task_id" :task="task"></task>
+    </transition-group>
+  </div>
 </template>
 
 <script>
