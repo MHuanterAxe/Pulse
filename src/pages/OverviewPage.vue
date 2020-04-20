@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import navigation from '../components/Overview/navigation'
 document.addEventListener('deviceready', () => {
 }, false)
@@ -25,7 +26,15 @@ export default {
   components: {
     navigation
   },
+  methods: {
+    ...mapActions({
+      fetchTasks: 'Tasks/fetchTasks',
+      fetchDoneTasks: 'Tasks/fetchDoneTasks'
+    })
+  },
   mounted () {
+    this.fetchTasks()
+    this.fetchDoneTasks()
     this.$router.push({ name: 'overview-notes' })
   }
 }

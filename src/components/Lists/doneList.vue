@@ -1,26 +1,26 @@
 <template>
   <div class="main q-mt-md">
     <h4 class="text-medium app-ml-20">Завершенные</h4>
-    <transition-group v-if="notes" class="notes q-pt-md" name="list" appear mode="out-in">
-      <note v-for="note in notes" :key="note.note_id" :note="note"></note>
+    <transition-group v-if="tasks" class="notes q-pt-md" name="list" appear mode="out-in">
+      <task v-for="task in tasks" :key="task.task_id" :task="task"></task>
     </transition-group>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import note from '../note'
+import task from '../task'
 export default {
   name: 'NoteList',
-  components: { note },
+  components: { task },
   computed: {
     ...mapGetters({
-      notes: 'Notes/notes'
+      tasks: 'Tasks/tasksDone'
     })
   },
   methods: {
     ...mapActions({
-      fetch: 'Notes/fetchNotes'
+      fetch: 'Tasks/fetchDoneTasks'
     })
   },
   async created () {

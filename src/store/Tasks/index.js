@@ -1,15 +1,21 @@
 import API from '../../boot/'
 
 const state = {
-  tasks: []
+  tasks: [],
+  tasksDone: []
 }
 const getters = {
   tasks: state => state.tasks,
-  count: state => state.tasks.length
+  tasksDone: state => state.tasksDone,
+  count: state => state.tasks.length,
+  countDone: state => state.tasksDone.length
 }
 const mutations = {
   SET_TASKS (state, payload) {
     state.tasks = payload
+  },
+  SET_DONE_TASKS (state, payload) {
+    state.tasksDone = payload
   }
 }
 const actions = {
@@ -22,12 +28,22 @@ const actions = {
         })
     })
   },
+  fetchDoneTasks ({ commit }) {
+    return new Promise((resolve, reject) => {
+      API.defaults.headers.authorization = localStorage.getItem('jwt')
+      API.get('/tasks/done')
+        .then(res => {
+          commit('SET_DONE_TASKS', res.data.data)
+        })
+    })
+  },
   updateTask ({ commit, dispatch }, payload) {
     return new Promise((resolve, reject) => {
       API.defaults.headers.authorization = localStorage.getItem('jwt')
       API.put('/tasks/update/' + payload)
         .then(response => {
           dispatch('fetchTasks').then(() => resolve(response))
+          dispatch('fetchDoneTasks').then(() => resolve(response))
         })
         .catch(error => {
           reject(error)
@@ -40,6 +56,7 @@ const actions = {
       API.delete('/tasks/delete/' + payload)
         .then(response => {
           dispatch('fetchTasks').then(() => resolve(response))
+          dispatch('fetchDoneTasks').then(() => resolve(response))
         })
         .catch(error => {
           reject(error)
