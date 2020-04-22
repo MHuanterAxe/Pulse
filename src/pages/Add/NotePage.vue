@@ -11,11 +11,14 @@
     </div>
     <div class="main q-pb-xl">
       <q-input
-        v-model="note.label"
         class="input"
+        v-model="note.label"
         no-error-icon
         borderless
         outlined
+        autogrow
+        autofocus
+        :rules="[ val => val.length < 75 || 'Слишком длинное название заметки!' ]"
         type="text"
         placeholder="Название заметки"
       ></q-input>
@@ -23,9 +26,10 @@
         v-model="note.text"
         class="input"
         no-error-icon
-        autogrow
         borderless
         outlined
+        autogrow
+        autofocus
         type="text"
         placeholder="Текст заметки"
       ></q-input>
@@ -39,7 +43,13 @@
           ></btn-toggle>
         </div>
       </div>
-      <button @click="handleSubmit" class="button button-shadow button-main text-medium">Создать</button>
+      <q-btn
+        dense
+        flat
+        :disable="note.label === '' || note.label.length >= 75"
+        @click="handleSubmit"
+        :class="btnClass"
+      >Создать</q-btn>
     </div>
   </q-page>
 </template>
@@ -47,6 +57,7 @@
 <script>
 import btnToggle from '../../components/Add/btnToggle'
 import { mapActions } from 'vuex'
+import { Dark } from 'quasar'
 document.addEventListener('deviceready', () => {
 }, false)
 export default {
@@ -87,6 +98,14 @@ export default {
     }
   },
   components: { btnToggle },
+  computed: {
+    btnClass () {
+      return [
+        'button-main button-shadow text-medium',
+        { 'button-dark-shadow button-dark': Dark.isActive }
+      ]
+    }
+  },
   methods: {
     ...mapActions({
       add: 'Add/addNote'

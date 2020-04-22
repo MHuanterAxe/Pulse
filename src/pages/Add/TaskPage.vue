@@ -16,6 +16,9 @@
         no-error-icon
         borderless
         outlined
+        autogrow
+        autofocus
+        :rules="[ val => val.length < 75 || 'Слишком длинное название задачи!' ]"
         type="text"
         placeholder="Название задачи"
       ></q-input>
@@ -27,6 +30,7 @@
           borderless
           outlined
           placeholder="Дата"
+          :value="now.date"
           v-model="task.date"
           :rules="['date']"
         >
@@ -38,7 +42,7 @@
             <q-date
               title="Дата задачи"
               first-day-of-week="1"
-              flat :value="task.date"
+              flat
               color="primary"
               :options="dateOptions"
               v-model="task.date"
@@ -63,7 +67,6 @@
               flat
               format24h
               :options="timeOptions"
-              :value="task.time"
               color="primary"
               v-model="task.time"
               @input="() => $refs.qDateProxy.hide()"
@@ -81,12 +84,19 @@
           ></btn-toggle>
         </div>
       </div>
-      <button @click="handleSubmit" class="button button-shadow button-main text-medium">Создать</button>
+      <q-btn
+        dense
+        flat
+        :disable="task.label === '' || task.label.length >= 75"
+        @click="handleSubmit"
+        :class="btnClass"
+      >Создать</q-btn>
     </div>
   </q-page>
 </template>
 
 <script>
+import { date, Dark } from 'quasar'
 import btnToggle from '../../components/Add/btnToggle'
 import { mapActions } from 'vuex'
 document.addEventListener('deviceready', () => {
@@ -95,6 +105,10 @@ export default {
   name: 'AddTaskPage',
   data () {
     return {
+      now: {
+        date: date.formatDate(Date.now(), 'DD/MM/YYYY') || '',
+        time: date.formatDate(Date.now(), 'HH:mm') || ''
+      },
       task: {
         label: '',
         date: '',
@@ -130,19 +144,36 @@ export default {
     }
   },
   components: { btnToggle },
+  computed: {
+    btnClass () {
+      return [
+        'button-main button-shadow text-medium',
+        { 'button-dark-shadow button-dark': Dark.isActive }
+      ]
+    }
+  },
   methods: {
     ...mapActions({
       add: 'Add/addTask'
     }),
     async handleSubmit () {
+      if (this.task.date === '') {
+        this.task.date = date.formatDate(Date.now(), 'DD/MM/YYYY')
+      }
       await this.add(this.task)
       await this.$router.push({ name: 'add' })
     },
-    dateOptions (date) {
-      return Date.parse(date) - Date.now() + 24 * 3600 * 1000 >= 0
+    dateOptions (d) {
+      return Date.parse(d) - Date.now() + 24 * 3600 * 1000 >= 0
     },
     timeOptions (hr, min) {
-      return hr - new Date().getHours() >= 0
+      if (this.task.date !== '') {
+        if (date.formatDate(Date.now(), 'DD/MM/YYYY') === date.formatDate(this.task.date, 'DD/MM/YYYY')) {
+          return hr - new Date().getHours() >= 0
+        }
+      } else {
+        return hr - new Date().getHours() >= 0
+      }
     }
   }
 }

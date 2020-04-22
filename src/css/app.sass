@@ -40,17 +40,26 @@ p, h1, h2, h3, h4, h5, h6
     padding: 8px
     width: 100%
     color: #7E3CB0
+    background-color: transparent
   &-back
+    transition: all 0.5s ease-in-out
     height: 30px
+  &-dark
+    transition: all 0.5s ease-in-out
+    background: #272727
+    &-shadow
+      transition: all 0.5s ease-in-out
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.4) !important
   &-shadow
+    transition: all 0.5s ease-in-out
     box-shadow: 0px 2px 5px rgba(132, 132, 132, 0.5)
   &-active
+    transition: all 0.5s ease-in-out
     padding: 8px
     width: 100%
     background-color: #7E3CB0
 .input
   height: auto
-  margin: 8px 0 4px 0
   & input
     padding: 10px
   & textarea

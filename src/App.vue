@@ -5,6 +5,8 @@
 </template>
 
 <script>
+document.addEventListener('deviceready', function () {
+}, false)
 export default {
   name: 'App',
   created () {
