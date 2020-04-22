@@ -24,9 +24,10 @@ const mutations = {
 const actions = {
   fetchUserData ({ commit }) {
     return new Promise((resolve, reject) => {
-      API.get('user')
+      API.defaults.headers.authorization = localStorage.getItem('jwt')
+      API.get('user/')
         .then(res => {
-          commit('SET_USER', res.data)
+          commit('SET_USER', res.data.data)
           resolve(res)
         })
         .catch(err => {
